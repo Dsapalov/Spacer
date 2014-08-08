@@ -1,5 +1,6 @@
 package main
 {
+	import flash.display.DisplayObject;
 	import flash.display.Sprite;
 	import flash.events.Event;
 	
@@ -22,22 +23,6 @@ package main
 			addEventListener(Event.ADDED_TO_STAGE, initHandler);
 		}
 		
-		protected function initHandler(event:Event):void
-		{
-			state = new Menu(this);
-			addEventListener(Event.ENTER_FRAME, updateHandler);
-		}
-		
-		protected function updateHandler(event:Event):void
-		{
-			update();
-		}
-		
-		private function update():void
-		{
-			state.update();
-		}
-		
 		public function changeGameState(newState:uint):void
 		{
 			if(state)
@@ -51,24 +36,38 @@ package main
 				case GAME_STATE_MENU:
 				{
 					state = new Menu(this);
+					addChild(DisplayObject(state));
 					break;
 				}
-				
+					
 				case GAME_STATE_PLAY:
 				{
 					state = new Play(this);
+					addChild(DisplayObject(state));
 					break;
 				}
 					
 				case GAME_STATE_GAME_OVER:
 				{
 					state = new GameOver(this);
+					addChild(DisplayObject(state));
 					break;
 				}
 				default:
 					break;
 			}	
 		}
+
+		protected function initHandler(event:Event):void
+		{
+			state = new Menu(this);
+			addChild(DisplayObject(state));
+			addEventListener(Event.ENTER_FRAME, updateHandler);
+		}
 		
+		protected function updateHandler(event:Event):void
+		{
+			state.update();
+		}
 	}
 }

@@ -1,10 +1,12 @@
 package gameStates
 {
+	import flash.display.Sprite;
+	
 	import interfaces.IState;
 	
 	import main.Game;
 	
-	public class GameOver implements IState
+	public class GameOver extends Sprite implements IState
 	{
 		private var game:Game;
 		public function GameOver(game:Game)

@@ -9,6 +9,7 @@ package main
 		public function Spacer()
 		{
 			game = new Game();
+			addChild(game);
 		}
 	}
 }
